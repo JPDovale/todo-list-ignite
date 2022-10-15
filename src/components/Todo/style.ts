@@ -8,6 +8,7 @@ export const TodoContainer = styled.section`
   //sizes
   width: 100%;
   max-width: 46rem;
+  padding: 0 1.5rem;
   padding-bottom: 5rem;
   //font
 
