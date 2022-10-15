@@ -100,7 +100,7 @@ export const TodoContainer = styled.section`
       }
     }
 
-    .list-tasks {
+    .tasks {
       display: flex;
       flex-direction: column;
       gap: 0.75rem;

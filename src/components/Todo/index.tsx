@@ -1,6 +1,6 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { PlusCircle, ClipboardText } from "phosphor-react";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Task } from "../Task";
 
 import { TodoContainer } from "./style";
@@ -12,8 +12,6 @@ interface Task {
 }
 
 export function Todo() {
-  const [animationParent] = useAutoAnimate<HTMLDivElement>();
-
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [tasks, setTasks] = useState<Task[]>([]);
   const tasksCompleted = tasks.filter((task) => task.checked);
@@ -59,6 +57,8 @@ export function Todo() {
     setTasks(newTasks);
   }
 
+  const [listRef] = useAutoAnimate<HTMLUListElement>();
+
   return (
     <TodoContainer>
       <header className="add-task">
@@ -91,9 +91,9 @@ export function Todo() {
           </div>
         </header>
 
-        <div className="tasks">
+        <ul className="tasks" ref={listRef}>
           {tasks[0] ? (
-            <div className="list-tasks" ref={animationParent}>
+            <>
               {tasks.map((task) => (
                 <Task
                   title={task.title}
@@ -104,7 +104,7 @@ export function Todo() {
                   handleDeleteTask={handleDeleteTask}
                 />
               ))}
-            </div>
+            </>
           ) : (
             <div className="empty">
               <ClipboardText size={56} />
@@ -116,7 +116,7 @@ export function Todo() {
               </div>
             </div>
           )}
-        </div>
+        </ul>
       </main>
     </TodoContainer>
   );

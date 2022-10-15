@@ -19,7 +19,7 @@ export function Task(props: TaskProps) {
       <div className={`task ${checked && "complete"}`}>
         <div className="check-box" onClick={() => handleUpdateTask(id)}>
           {checked && <Check size={14} weight="bold" className="vector" />}
-          <input className="check" type="checkbox" checked={checked} />
+          <input className="check" type="checkbox" checked={checked} readOnly />
         </div>
         <p className="task-content">{title}</p>
         <button className="delete-task" onClick={() => handleDeleteTask(id)}>
